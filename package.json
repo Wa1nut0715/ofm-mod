@@ -42,7 +42,11 @@
     "locale",
     "icon.svg",
     "cordis.patch.yml",
-    "LICENSE"
+    "LICENSE",
+    "README.md",
+    "INSTALL.md",
+    "docs",
+    "tools"
   ],
   "keywords": [
     "dsh",
