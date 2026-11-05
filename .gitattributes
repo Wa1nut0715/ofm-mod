@@ -1,0 +1,18 @@
+# 本仓库必须**逐字节**保真。
+#
+# 原因：`vendor/channel-pack/pack.js` 是一个 2.9 MB 的单文件构建产物，
+# `docs/tencent-11128.patch` 是按字节生成的 unified diff，
+# `docs/MODIFICATIONS.md` 里还记了两个基准 SHA256。
+# 只要行尾被任何环节（core.autocrlf、编辑器、git 的 text 处理）改写一次，
+# 补丁就打不上、SHA 就对不上，而症状看起来是"补丁失效"，极难查。
+#
+# 本机 `D:/Git/Git/etc/gitconfig` 里 core.autocrlf=true（系统级），
+# 会在 checkout 时把 LF 换成 CRLF —— 所以这里显式关掉一切文本转换：
+# `-text` 表示"不做行尾规范化，原样存取"。
+* -text
+
+# 二进制文件再显式标一次（仅为可读性，`* -text` 已覆盖）
+*.wasm binary
+*.png binary
+*.jpg binary
+*.ico binary

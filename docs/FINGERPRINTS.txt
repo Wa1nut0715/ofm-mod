@@ -1,0 +1,39 @@
+# 指纹规则原文（机器导出，勿手改）
+
+本文件由 `node tools/dump-rules.mjs --emit-doc` 生成，内容是从
+`vendor/channel-pack/pack.js` 求值得到的**真实字节**。
+
+记法：`\x20` = ASCII 空格（U+0020），`\x2D` = 连字符（U+002D）。
+这两个字符是全文唯一容易看漏的地方，所以一律转义，不做任何"看起来更好"的处理。
+
+## 规则 0
+
+```
+find    (47 字符): "Main\x20branch\x20(you\x20will\x20usually\x20use\x20this\x20for\x20PRs)"
+replace (33 字符): "Main\x20branch\x20(PRs\x20usually\x20go\x20here)"
+note          : Gitee IKJNA1；本机 2026-10-05 对 workbuddy / CodeBuddy 双端点实测复现
+```
+
+## 规则 1
+
+```
+find    (47 字符): "You\x20are\x20an\x20AI\x20agent\x20powered\x20by\x20DeepSeek\x20Harness"
+replace (53 字符): "You\x20are\x20an\x20AI\x20agent\x20operating\x20inside\x20DeepSeek\x20Harness"
+note          : 本机 2026-10-26 对 copilot.tencent.com 实测：整句命中即 400/11128；改写 powered by 即放行
+```
+
+## 规则 2
+
+```
+find    (56 字符): "You\x20are\x20Claude\x20Code,\x20Anthropic's\x20official\x20CLI\x20for\x20Claude"
+replace (77 字符): "You\x20are\x20a\x20coding\x20assistant,\x20an\x20interactive\x20CLI\x20for\x20software\x20engineering\x20tasks"
+note          : 本机 2026-10-26 实测：整句拦截，拆开写就放行
+```
+
+## 规则 hard（`rewriteTencentBodyFingerprintsHard`）
+
+```
+includes   : "DeepSeek\x20Harness"
+split      : "DeepSeek\x20Harness"
+join       : "DeepSeek\x2DHarness"
+```

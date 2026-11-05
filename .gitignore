@@ -1,0 +1,51 @@
+# ── 依赖与构建产物 ─────────────────────────────────────────────
+node_modules/
+
+# ── 本机 DSH 运行时数据：绝不要提交 ────────────────────────────
+# 这些都是活 token / 账号绑定数据，只应存在于装了插件的机器上。
+# 注意：这里**不能**用裸目录名（如 `channel-pack/`）—— 那会把
+# vendor/channel-pack/ 一并忽略掉，而 pack.js 正是本仓库的核心。
+.credentials.yaml
+credentials.yaml
+
+# DSH 数据目录（位于 ~/.dsh-beta/，正常不会出现在仓库里；仅作兜底）
+/.dsh-beta/
+/dsh-beta/
+
+# 插件运行时写出的状态文件（同样在 ~/.dsh-beta/ 下，列出具体文件名，
+# 不使用目录通配，避免误伤 vendor/ 与 src/）
+settings.json
+stats.json
+availability.json
+catalog.json
+feed.json
+session-map.json
+eac-user.json
+token-ledger.json
+auto-checkin.json
+
+# 腾讯渠道诊断落盘
+tencent-dump/
+
+# ── 打包产物 ───────────────────────────────────────────────────
+*.tgz
+*.zip
+*.7z
+*.rar
+
+# ── 编辑器 / 系统 ──────────────────────────────────────────────
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ── 日志、备份与临时文件 ───────────────────────────────────────
+*.log
+*.tmp
+*.bak
+*.bak-*
+*-backup
+
+# 安装验证时临时建的补丁试验目录（见 docs/MODIFICATIONS.md 第五节）
+_applytest/
